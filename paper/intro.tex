@@ -32,6 +32,8 @@ A primary goal of ours is compatibility with existing x86 and x11 applications s
 We also provide emulation which appears to the user to be at the application level, making it simpler conceptually to work with.
 Our biggest contribution is the way we bring live migration into this.  This is the most novel part of our program.
 
-%\subsection{Proposed Architecture}
+\subsection{Proposed Architecture}
+\label{proposedarch}
 %Here describe what we propose to do, perhaps?
 %Our timeline/evaluation are kinda worthless without it.
+In order to retain the Android application functionality, we plan to virtualize our x86 apps in addition to running the Android runtime stack.  The x86 vms will be run on top of QEMU with Android as the host OS.  X11 will be ported to Android and integrated to run cleanly with the current window manager as well as the vms.  
