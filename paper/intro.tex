@@ -5,11 +5,14 @@ Mobile devices today run many third party applications to perform complex tasks 
 
 Environment migration has been studied earlier, in the context of servers in a cluster \cite{clark2005live} and enables administrators of clusters to perform maintainence tasks without interruption. On the other hand, migrating a system to a mobile device can take advantage of network or computation facilities that are closer to the user's location and provide the user with a consistent experience irrespective of the network connectivity. Migration techniques also help maintain consistent snapshots which allow easy transfer of data when users switch mobile phones and to roll-back the system to a previously known state.
 
-{\bf NOTE: Need to mention OK-L4 and VMWare MVP, ARM Trustzone \newline}
+{\bf NOTE: Need to mention OK-L4 and  ARM Trustzone \newline}
 \subsection{Existing Work}
-Currently, there are many solutions available for virtualization on desktop environments.  VMware is a popular closed source solution which implements a variety of virtualization techniques and is used in both industry and academia.  KVM \cite{kvm}, QEMU \cite{qemu}, and XEN \cite{xen} are all open source solutions, implementing their own assortments of virtualization techniques.  Unfortunately, none of these solutions (without massive modification) is appropriate for a mobile environment.
+Currently, there are many solutions available for virtualization on desktop environments.  VMware is a popular closed source solution which implements a variety of virtualization techniques and is used in both industry and academia.  KVM \cite{kvm}, QEMU \cite{qemu}, and XEN \cite{xen} are all open source solutions, implementing their own assortments of virtualization techniques.  These solutions for the most part do not work well in a mobile environment for performance, security, and usability reasons. \\
 
-There are various mobile solutions; however, most of these projects don't value portability very highly.  As a result, one of the main advantages of a mobile platform is lost.  The Columbia Android paper prioritizes performance and security at the cost of usability and portability. They disable the Android's runtime stack, sacrificing a large portion of the usability of the phone.  Another solution, MobiVMM \cite{mobivmm}, focuses on power efficiency and security.  Similarly to the Columbia Android project, the usability is sacrificed in order to further other goals.
+Recently there has been a surge of research done for mobile virtualization.  One such solution is MobiVMM \cite{mobivmm}, which prioritizes performance and security at the cost of usability and portability.  Work has been done to port KVM to Android \cite{columbia}, focusing on performance and functionality.  All of these solutions either dual-boot the OS or require disabling the phone's existing runtime stack to use them. \\
+
+VMware's MVP project \cite{mvp} is most similar to ours.  They introduce a very thin hypervisor with an emphasis on usability, performance, and security--without sacrificing the phone's functionality.   However their implementation does not integrate with the host OS, but rather replaces and contains it.  This is useful, but tangential to our work.  As described in Section \ref{oursbetter}, we aim to provide a Type II VM and prioritize live migration capabilities as well as usability.  Furthermore, we are mostly concerned about containing applications for isolation, security, usability, and portability.  Instead of virtualization the existing OS to protect others from it, we assume it is trusted and only have to isolate new applications.  This provides for a very different architecture in our implementation. \\
+%We use an idea similar to their JeOS to provide a minimal guest OS when virtualizing appliances.
 
 \begin{figure}[bh]
 \centering
@@ -18,11 +21,17 @@ There are various mobile solutions; however, most of these projects don't value 
 \label{fig:arch}
 \end{figure}
 
+{\bf NOTE: Add some discussion about power usage, memory constraints \newline}
 %% This subsection really needs a better title!
 \subsection{Our solution}
+\label{oursbetter}
+% this section sucks, feel free to completely rewrite it, or I will at some point.
+%XXX: Perhaps we should merge this with the above subsection, and let the 'proposed architecture' section describe what we're doing--and not have to worry about constantly pointing out how what it does is different than ever other mobile virtualization solution
 We intend to improve upon the existing mobile virtualization solutions through superior usability.  By integrating with the host OS and building upon the existing user experience and bring added value to existing devices.
 A primary goal of ours is compatibility with existing x86 and x11 applications such that upon our project completion we can immediately take advantage of the vast quantity of applications that already use these.
 We also provide emulation which appears to the user to be at the application level, making it simpler conceptually to work with.
 Our biggest contribution is the way we bring live migration into this.  This is the most novel part of our program.
 
-{\bf NOTE: Add some discussion about power usage, memory constraints \newline}
+%\subsection{Proposed Architecture}
+%Here describe what we propose to do, perhaps?
+%Our timeline/evaluation are kinda worthless without it.
