@@ -1,7 +1,7 @@
 \section{Introduction}
-In recent years, virtual machines have become prevalent in cluster computing environments \cite{gartner2009virtual} as they lower power costs and help in conserving data center space. Hardware improvements have meant that smart phone configurations found today resemble desktop machines from few years ago and many of them run commodity operating systems. There is a growing interest in academia \cite{cox2007pocket} and industry \cite{vmware2009nextfrontier} about the benefits of virtualization on these devices. We believe that virtualization can provide better security guarantees in mobile devices and enable useful applications like environment migration. \\
-
 Mobile devices today run many third party applications to perform complex tasks like web browsing, banking and gaming. Recent studies have found that smartphones are the target of an increasing number of malware attacks \cite{bose2006mobile},  \cite{cybercriminals2007banks},  \cite{iphone2010seriot} and their security is important as personal data such as contacts, credit card numbers and passwords are often stored on the device. While some security models \cite{androidsecurity} provide a stronger process level isolation among applications, operating system bugs such as \cite{kernel2009vulnerability}, \cite{opencore2009android}, \cite{sms2009iphone} allow malicious applications to take over the device. We believe that virtualization can be useful for secure isolation of third party code from confidential data and provide a greater defence-in-depth against attacks on the system.\\
+
+In recent years, virtual machines have become prevalent in cluster computing environments \cite{gartner2009virtual} as they lower power costs and help in conserving data center space. Hardware improvements have meant that smart phone configurations found today resemble desktop machines from few years ago and many of them run commodity operating systems. There is a growing interest in academia \cite{cox2007pocket} and industry \cite{vmware2009nextfrontier} about the benefits of virtualization on these devices. We believe that virtualization can provide better security guarantees in mobile devices and enable useful applications like environment migration. \\
 
 Environment migration has been studied earlier, in the context of servers in a cluster \cite{clark2005live} and enables administrators of clusters to perform maintainence tasks without interruption. On the other hand, migrating a system to a mobile device can take advantage of network or computation facilities that are closer to the user's location and provide the user with a consistent experience irrespective of the network connectivity. Migration techniques also help maintain consistent snapshots which allow easy transfer of data when users switch mobile phones and to roll-back the system to a previously known state.
 
@@ -14,14 +14,14 @@ Recently there has been a surge of research done for mobile virtualization.  One
 VMware's MVP project \cite{mvp} is most similar to ours.  They introduce a very thin hypervisor with an emphasis on usability, performance, and security--without sacrificing the phone's functionality.   However their implementation does not integrate with the host OS, but rather replaces and contains it.  This is useful, but tangential to our work.  As described in Section \ref{oursbetter}, we aim to provide a Type II VM and prioritize live migration capabilities as well as usability.  Furthermore, we are mostly concerned about containing applications for isolation, security, usability, and portability.  Instead of virtualization the existing OS to protect others from it, we assume it is trusted and only have to isolate new applications.  This provides for a very different architecture in our implementation. \\
 %We use an idea similar to their JeOS to provide a minimal guest OS when virtualizing appliances.
 
-\begin{figure}[bh]
+\begin{figure}[tbh]
 \centering
 \includegraphics[width=1.0\columnwidth]{arch}
 \caption{Architecture diagram}
 \label{fig:arch}
 \end{figure}
 
-{\bf NOTE: Add some discussion about power usage, memory constraints \newline}
+{\bf NOTE: Add some discussion about power usage, memory constraints ? \newline}
 %% This subsection really needs a better title!
 \subsection{Our solution}
 \label{oursbetter}
