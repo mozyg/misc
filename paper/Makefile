@@ -5,7 +5,7 @@ paper.pdf: *.tex *.bib
 	bibtex paper
 	pdflatex paper
 	pdflatex paper
-	pdflatex paper	
+	pdflatex paper
 
 clean:
 	rm -f *.bak
