@@ -3,7 +3,6 @@ Modern mobile devices run third party applications to perform complex tasks like
 
 In recent years, virtual machines have become prevalent in cluster computing environments \cite{gartner2009virtual} as they provide isolation between shared usage of machines in a data center. As a result of hardware improvements, smart phone configurations found today resemble desktop machines from few years ago and many of them run commodity operating systems. There is a growing interest in academia \cite{cox2007pocket} and industry \cite{vmware2009nextfrontier} about the benefits of virtualization on these devices. Virtualization provides better security guarantees in mobile devices than current solutions offer as well enabling useful applications like environment migration. \\
 
-
 Migrating a system to a mobile device can take advantage of network or computation facilities that are closer to the user's location and provide the user with a consistent experience irrespective of the network connectivity. Environment migration has been studied earlier, in the context of servers in a cluster \cite{clark2005live} and enables administrators of clusters to perform maintenance tasks without interruption. On the other hand, migration techniques on mobile devices can help maintain consistent snapshots which allow easy transfer of data when users switch mobile phones and to roll-back the system to a previously known state.
 
 \subsection{Existing Work}
@@ -30,7 +29,7 @@ Our proposed architecture has two main components: the virtualization framework,
 
 The other component is the integration front-end.  This contains a light X-server that has been integrated into the host OS, and also contains the VM manager.  The VM manager will either run inside the X-server as a native application (ARM-based), or as a separate application within the host OS.  The VM manager will be the user interface that controls launching, switching, suspending, resuming, migrating the VM's and ensuring the X-server is running properly. Most of this actual logic and functionality will be implemented by the hypervisor in the virtualization framework.\\
 
-A shared X-server removes rendering overhead from each VM and reduces the complexity in composing the UI. We plan to use different X-sessions per VM to reduce sharing between them. Additionally the X-server will be running native code, which we will allow for it to be less cpu-intensive than running inside a VM. \\
+A shared X-server removes rendering overhead from each VM and reduces the complexity in composing the UI. We chose to share the rendering state between third-party applications for performance reasons and simplicity of design, but ensure isolation from native applications.  Additionally the X-server will be running native code, which will allow for it to be less CPU intensive than running inside a VM. \\
 
 Additionally we aim to have the virtualization framework will be device independent, which is important because we anticipate this to be the more complex component.  The integration front-end will have to be ported for each new device we support, but we will strive to make its implementation simple. Our first implementation will focus on one particular device and OS and support live migration of applications from desktops. \\
 
