@@ -7,6 +7,9 @@ paper.pdf: *.tex *.bib
 	pdflatex paper
 	pdflatex paper
 
+spellcheck:
+	for i in *.tex; do aspell -c "$$i"; done
+
 clean:
 	rm -f *.bak
 	rm -f *~
