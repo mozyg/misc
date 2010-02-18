@@ -11,7 +11,7 @@ Currently, there are many solutions available for virtualization on desktop envi
 
 Recently there has been a surge of research done for mobile virtualization.  One such solution is MobiVMM \cite{mobivmm}, which prioritizes performance and security at the cost of usability and portability.  Work has been done to port KVM to Android \cite{columbia}, focusing on performance and functionality.  All of these solutions either dual-boot the OS or require disabling the phone's existing runtime stack to use them. \\
 
-VMware's MVP project \cite{mvp} is most similar to ours.  They introduce a very thin hypervisor with an emphasis on usability, performance, and security--without sacrificing the phone's functionality.   However their implementation does not integrate with the host OS, but rather replaces and contains it.  This is useful, but tangential to our work.  As described in Section \ref{oursbetter}, we aim to provide a Type II VM and prioritize live migration capabilities as well as usability.  Furthermore, we are mostly concerned about containing applications for isolation, security, usability, and portability.  Instead of virtualization the existing OS to protect others from it, we assume it is trusted and only have to isolate new applications.  This provides for a very different architecture in our implementation. \\
+VMware's MVP project \cite{mvp} is most similar to ours.  They introduce a very thin hypervisor with an emphasis on usability, performance, and security--without sacrificing the phone's functionality.   However their implementation does not integrate with the host OS, but rather replaces and contains it.  This is useful, but tangential to our work.  As described in Section \ref{sec:proposedarch}, we aim to provide a Type II VM and prioritize live migration capabilities as well as usability.  Furthermore, we are mostly concerned about containing applications for isolation, security, usability, and portability.  Instead of virtualization the existing OS to protect others from it, we assume it is trusted and only have to isolate new applications.  This provides for a very different architecture in our implementation. \\
 %We use an idea similar to their JeOS to provide a minimal guest OS when virtualizing appliances.
 
 \begin{figure}[tbh]
@@ -22,18 +22,16 @@ VMware's MVP project \cite{mvp} is most similar to ours.  They introduce a very 
 \end{figure}
 
 {\bf NOTE: Add some discussion about power usage, memory constraints ? \newline}
-%% This subsection really needs a better title!
-\subsection{Our solution}
-\label{oursbetter}
-% this section sucks, feel free to completely rewrite it, or I will at some point.
-%XXX: Perhaps we should merge this with the above subsection, and let the 'proposed architecture' section describe what we're doing--and not have to worry about constantly pointing out how what it does is different than ever other mobile virtualization solution
-We intend to improve upon the existing mobile virtualization solutions through superior usability.  By integrating with the host OS and building upon the existing user experience and bring added value to existing devices.
-A primary goal of ours is compatibility with existing x86 and x11 applications such that upon our project completion we can immediately take advantage of the vast quantity of applications that already use these.
-We also provide emulation which appears to the user to be at the application level, making it simpler conceptually to work with.
-Our biggest contribution is the way we bring live migration into this.  This is the most novel part of our program.
+{\bf NOTE: Should we mention OP (like Prof King mentioned, citing papers of people reviewing it never hurt ;)) but also because are architecture, accidentally, does share a lot with the OP design...?}
 
 \subsection{Proposed Architecture}
-\label{proposedarch}
+\label{sec:proposedarch}
 %Here describe what we propose to do, perhaps?
 %Our timeline/evaluation are kinda worthless without it.
-In order to retain the Android application functionality, we plan to virtualize our x86 apps in addition to running the Android runtime stack.  The x86 vms will be run on top of QEMU with Android as the host OS.  X11 will be ported to Android and integrated to run cleanly with the current window manager as well as the vms.  
+Our proposed architecture has two main components: the virtualization framework, and the integration front-end.  The virtualzation framework contains the hypervisor (QEMU or KVM based) as well as each of the spawned VM's (see Figure \ref{fig:arch}.  Each VM will contain a thin OS (as thin as possible) with the primary goal of each VM running an application.  The VM's will be running x86-based Operating Systems as a design decision to enable a more diverse set of target applications to be run (note that most mobile devices that we are targeting are ARMv6 or ARMv7).  Each of the VM's will headless themselves, but will run their applications via X, connecting to the X server. \\
+
+The other component is the integration front-end.  This contains a light X server that has been integrated into the host OS, and also contains the VM manager.  The VM manager will either run inside the X-server as a native application (ARM-based), or as a separate application within the host OS.  The VM manager will be the user interface that controls launching, suspending, resuming, migrating the VM's as well as ensuring the X-server is running properly. Note that most of this actual logic and functionality will be in the hypervisor in the virtualization framework.\\
+
+Note that this shared X-server allows us to make the graphical part of the applications common, which we believe is an improvement over having each of the VM's run an X-server, and then have another layer compositing or managing those into what the user sees.  Additionally the X-server will be running native code, which we hope will allow for it to be less cpu-intensive than it might otherwise. \\
+
+Additionally we aim to have the slowest part (the virtualization framework) be as device independent as possible, which is important because we anticipate this being the most difficult to make effective.  The integration front-end will have to be ported for each new device we support, but we hope to make that as simple as possible.  As an example, we should be able to take advantage of existing desktop X servers and support desktops as a client for our system, but we leave that as future work.  Our first implementation will focus on one particular device and OS, but even there we will be able to support live migration of applications. \\
