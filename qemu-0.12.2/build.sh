@@ -2,13 +2,23 @@
 #Little script to build qemu the way I'm using it.
 #Assumes it's run in a sb2 env
 
+#I'm disabling SDL for now since it doesn't work on the pre as one would hope:
+#--assumes hw_surface, but that should just mean this is slower than it needs to be
+#--assumes resolution of 640x480, and a bunch of the code acts on this.  might be fixable
+#--enable-sdl \
+#--audio-drv-list=sdl \
+
 LDFLAGS="-Wl,-rpath=/usr/local/lib -L/usr/local/lib -lz" ./configure \
 --prefix= \
---enable-sdl \
---audio-drv-list=sdl \
+--disable-sdl \
+--disable-kvm \
 --disable-system \
+--enable-curses \
+--audio-drv-list= \
 --target-list=arm-linux-user,i386-linux-user,x86_64-linux-user,arm-softmmu,i386-softmmu,x86_64-softmmu && \
 \
+--extra-cflags="-I/usr/local/include -I/usr/local/include/ncurses"
+
 make -j8 && \
 
 make DESTDIR=`pwd`/../install install
