@@ -76,7 +76,6 @@ static inline void flush_icache_range(unsigned long start, unsigned long stop)
 {
 #if QEMU_GNUC_PREREQ(4, 1)
     //XXX: Determine if armv7 needs the icache flushed or not.
-    void __clear_cache( char *, char * );
     __clear_cache((char *) start, (char *) stop);
 #else
     register unsigned long _beg __asm ("a1") = start;

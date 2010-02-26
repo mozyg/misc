@@ -8,16 +8,17 @@
 #--enable-sdl \
 #--audio-drv-list=sdl \
 
-LDFLAGS="-Wl,-rpath=/usr/local/lib -L/usr/local/lib -lz" ./configure \
+./configure \
 --prefix= \
 --disable-sdl \
 --disable-kvm \
 --disable-system \
 --enable-curses \
 --audio-drv-list= \
---target-list=arm-linux-user,i386-linux-user,x86_64-linux-user,arm-softmmu,i386-softmmu,x86_64-softmmu && \
-\
---extra-cflags="-I/usr/local/include -I/usr/local/include/ncurses"
+--target-list=arm-linux-user,i386-linux-user,x86_64-linux-user,arm-softmmu,i386-softmmu,x86_64-softmmu \
+--extra-cflags="-I/usr/local/include -I/usr/local/include/ncurses" \
+--extra-ldflags="-Wl,-rpath=/usr/local/lib -L/usr/local/lib" \
+&&
 
 make -j8 && \
 
