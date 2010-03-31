@@ -2,3 +2,7 @@
 \subsection{Design Overview}
 \subsection{QEMU + X server}
 \subsection{Other Virtualization Techniques}
+\subsubsection{Linux Containers}
+Linux Containers (LXC) implement OS-level virtualization in order to run a number of isolated virtual environments on a single host.  LXC differs from conventional virtualization technices, which generally require the installation of guest OSes.  Unlike with conventional virtualization, LXC has almost no overhead as it does not require guest OSes or dynamic translation.  On the other hand, because it is a OS-level virtualization technique and runs processes on a Linux kernel, other OSes such as Windows and other UNIXes (BSD or OSX) can not be used as containers.  
+
+The main obstacle to using Linux Containers are the requirements.  LXC requires a Linux kernel version 2.6.27 or greater, and the Pre is running 2.6.24.  The Android is running 2.6.29; however, porting the tools to Android will likely be very difficult.
