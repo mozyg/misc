@@ -1,0 +1,37 @@
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage[margin=.95in]{geometry}
+\usepackage{times}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+
+\sloppy
+
+\title{MoVirt: More Mobile than Mobile}
+\author{Will Dietz, Kevin Larson, Shivaram Venkataraman\\
+\{wdietz2, klarson5, venkata4\}@illinois.edu\\
+University of Illinois at Urbana Champaign}
+
+\date{}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+
+\begin{document}
+
+\maketitle
+
+% No abstract for introduction
+%\input{abstract.tex}
+\input{intro.tex}
+\label{sec:intro}
+\input{timeline.tex}
+\label{sec:timeline}
+\input{eval.tex}
+\label{sec:eval}
+\input{results.tex}
+\label{sec:results}
+
+\bibliographystyle{abbrv}
+\bibliography{mybib.bib}
+\end{document}
