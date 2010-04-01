@@ -21,8 +21,13 @@ In summary, we propose to leverage an existing virtualization environment to bui
 
 \subsection{QEMU + X server}
 \subsection{Other Virtualization Techniques}
+The following list presents the different techniques that we are considering to have a faster, more usable and secure solution.
 \subsubsection{KVM}
+The Kernel Virtual Machine Monitor (KVM) is a virtualization technique in which the Linux kernel plays the role of a hypervisor. In traditional virtualization tools like Xen \cite{xen}, a hypervisor manages the scheduling, memory management and driver support for the different guest operating systems. Since the linux kernel already performs most of these tasks for the host operating system, it is efficient to re-use this functionality for the guest operating systems too. KVM consists of a kernel module, which introduces a guest mode,  page tables and handles privileged instructions through a 'trap-and-emulate' scheme. On the x86 architecture KVM uses hardware virtualization extensions like the Intel VT or AMD-V for the same. 
+The ARM architechture is not strictly virtualizable as there are privileged instructions which do not trap to the kernel and therefore a simple 'trap-and-emulate' approach cannot be used. Hence more complex techniques like dynamic binary translation, translation to add software interrupts or paravirtualization are required for porting KVM to ARM. There have been some initial attempts to port KVM to ARM \cite{columbia} but the high performance overhead reported leads us to explore other solutions for isolation and security. 
+
 \subsubsection{User Mode Linux}
+
 \subsubsection{Linux Containers}
 Linux Containers (LXC) implement OS-level virtualization techniques in order to run a number of isolated virtual environments on a single host.  LXC differs from conventional virtualization technices, which generally require the installation of guest OSes.  The isolated virtual environments or containers, are built upon other Linux security mechanisms.  Resource namespaces allow containers to manipulate the accessing of processes, files, and hardware resources.  Control groups are used to limit the resources used by a container.  Capability bounding sets reduce a container's priviledges.  
 
