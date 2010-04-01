@@ -2,12 +2,12 @@
 \label{sec:design}
 \subsection{Design Overview}
 
-\begin{figure}[tbh]
+\begin{figure*}[tb]
 \centering
-\includegraphics[width=1.0\columnwidth]{arch}
+\includegraphics[width=1.5\columnwidth]{arch}
 \caption{Architecture diagram}
 \label{fig:arch}
-\end{figure}
+\end{figure*}
 
 \label{sec:proposedarch}
 Our architecture has two main components: the virtualization framework, and the integration front-end.  The virtualization framework contains the hypervisor (KVM, UserMode Linux, or L4 based) or a container-ready kernel (Linux Containers-LXC) as well as each of the spawned VMs or containers (see Figure \ref{fig:arch}).  A VM would contain a thin OS for running the third-party application and a container could contain one or more application.  Initially we intended to explore both x86-based Operating Systems as well as ARM based systems.  However, initial results show that x86-based Operating Systems will be far too slow.  Although an x86-based OS would have enabled a more diverse set of target applications, ARM-based systems have less virtualization overhead and some options may not be prohibitively slow. %Each of the VMs will headless themselves, but will render their applications by connecting to the native X-server. *Is this still true?* \\
