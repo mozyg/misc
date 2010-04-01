@@ -12,12 +12,12 @@
 \caption{
 Virtualization Results: Kernel Boot time in seconds
 }
-\label{tab:analysis_table}
+\label{tab:virt_results}
 \end{table*}
 
 \subsection{Preliminary Virtualization Results}
 
-Currently, we have evaluated the overhead of virtualization with a QEMU-based implementations running various distributions of Linux on both the Android and the Palm Pre \ref{tab:virt_results}. The most successful implementation used ARM on ARM virtualization and a basic ARM kernel image provided along with QEMU. Unfortunately, even this implementation was far too slow, taking 52 seconds to boot on the Pre and 154 seconds to boot on the Android. Additionally response times were terrible, often taking several seconds to display text input. A Debian ARM Lenny image took over 15 minutes to boot on the Palm Pre and crashed on the Android during boot. x86 emulation on ARM was also tested, with a TTY-Linux image; however, this was the slowest by far, taking over half an hour to boot on the Palm Pre. On the Android, x86 guest mode QEMU would not even run. Overall these experiments suggest that binary translation is not usable and that we need to explore for different virtualization techniques listed in \ref{sec:design}.
+Currently, we have evaluated the overhead of virtualization with a QEMU-based implementations running various distributions of Linux on both the Android and the Palm Pre as shown in Table \ref{tab:virt_results}. The most successful implementation used ARM on ARM virtualization and a basic ARM kernel image provided along with QEMU. Unfortunately, even this implementation was far too slow, taking 52 seconds to boot on the Pre and 154 seconds to boot on the Android. Additionally response times were terrible, often taking several seconds to display text input. A Debian ARM Lenny image took over 15 minutes to boot on the Palm Pre and crashed on the Android during boot. x86 emulation on ARM was also tested, with a TTY-Linux image; however, this was the slowest by far, taking over half an hour to boot on the Palm Pre. On the Android, x86 guest mode QEMU would not even run. Overall these experiments suggest that binary translation is not usable and that we need to explore for different virtualization techniques listed in \ref{sec:design}.
 
 \subsection{X-Server numbers}
 
