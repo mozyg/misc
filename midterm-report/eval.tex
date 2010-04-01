@@ -9,7 +9,7 @@
 \label{fig:virt_results}
 \end{figure}
 
-Currently, virtualization has been tested with QEMU-based implementations running various linuxes on both the Android and the Pre \ref{virt_results}.  The most successful implementation used ARM on ARM virtualization and a basic ARM kernel image provided by QEMU.  Unfortunately, even this implementation was far too slow, taking 52 seconds to boot on the PRE and 154 seconds to boot on the Android.  Additionally response times were terrible, often taking several seconds to display text input.  A Debian ARM Lenny image took over 15 minutes to boot on the Pre and crashed on the Android during boot.  X86 on ARM was also tested, with a TTY-Linux image; however, this was the slowest by far, taking over half an hour to boot on the PRE.  On the Android, x86 guest mode QEMU would not even run.
+Currently, virtualization has been tested with QEMU-based implementations running various linuxes on both the Android and the Pre \ref{virt_results}.  The most successful implementation used ARM on ARM virtualization and a basic ARM kernel image provided by QEMU.  Unfortunately, even this implementation was far too slow, taking 52 seconds to boot on the Pre and 154 seconds to boot on the Android.  Additionally response times were terrible, often taking several seconds to display text input.  A Debian ARM Lenny image took over 15 minutes to boot on the Pre and crashed on the Android during boot.  X86 on ARM was also tested, with a TTY-Linux image; however, this was the slowest by far, taking over half an hour to boot on the Pre.  On the Android, x86 guest mode QEMU would not even run.
 
 \subsection{X-Server numbers}
 
