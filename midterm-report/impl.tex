@@ -2,7 +2,7 @@
 \label{sec:impl}
 \subsection{Cross-Compilation}
 Nearly all modern smartphones run ARM processors.  On the other hand, nearly all modern desktops run x86 or x86\_64 processors. As a result of the architectural differences, binaries created in normal desktop PC environments will not work on smartphones. Additionally, the devices themselves are rather limited with respect to building code.  Relatively limited cpu, memory, disk, coupled with input and usability concerns make this an unattractive way to compile code.  A number of devices have lacking userspace environments that would make compiling code on them even more difficult.
-Our solution is to use a cross-compileration environment to use a faster desktop to write our code targetting the various mobile platforms.
+Our solution is to use a cross-compilation environment to use a faster desktop to write our code targetting the various mobile platforms.
 We build upon the scratchbox2 enviroment \cite{sb2}, in particular using the cross-compilation enviroment created by webos-internals \cite{webosinterals}.\\
 
 Scratchbox2 is a cross-compilation engine that uses a combination of emulation and library interposition to make it easier to cross-compile code bases that don't otherwise provide a means to cross-compile.
