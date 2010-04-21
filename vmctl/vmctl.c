@@ -44,30 +44,27 @@
 
 #define MAX_PATH 256
 
-#define OLD_ROOT "mnt"
+#define OLD_ROOT "/mnt"
 #define CMD "/bin/sh"
 
 void usage(char *cmd)
 {
-        printf("Usage: %s [-u] <new_root> [<old_root>] [<command>]\n", cmd);
+        printf("Usage: %s <new_root> [<old_root>] [<command>]\n", cmd);
         printf("   Perform <command> under a new namespace with <new_root>\n");
         printf("   as the root of the filesystem.\n");
-        printf("   If -u is specified, the old root will be unmounted before"
-                        " <command> is executed.\n");
         printf("   <old_root> is relative to the old root.");
         printf("   If unspecified, <old_root> is '/mnt'.\n");
         printf("   If unspecified, <command> is '/bin/sh'.\n");
         exit(-EINVAL);
 }
 
-void check_mount(const char* root, const char *source, const char *target,
-                 const char *filesystemtype, unsigned long mountflags,
-                 const void *data)
+void check_mount(const char *source, const char* target_prefix,
+		 const char *target, const char *filesystemtype,
+		 unsigned long mountflags, const void *data)
 {
-	char path[MAX_PATH];
-	sprintf(path, "%s/%s", root, source);
-	printf("mounting %s at %s \n", path, target);
-        int ret = mount(path, target, filesystemtype, mountflags, data);
+	char target_path[MAX_PATH];
+	sprintf(target_path, "%s%s", target_prefix, target);
+        int ret = mount(source, target_path, filesystemtype, mountflags, data);
         if (ret) {
                 perror("mount");
                 exit(ret);
@@ -81,7 +78,6 @@ int main(int argc, char *argv[])
         uid_t uid;
         char *new_root, *old_root, *cmd, *argv0;
         char full_oldroot[MAX_PATH];
-        int do_umount;
         uid = getuid();
 
         if (uid) {
@@ -91,7 +87,15 @@ int main(int argc, char *argv[])
                 exit(-1);
         }
 
-	// Add CLONE_NEWPID here ? 
+        argv0 = argv[0];
+
+        if (argc < 2 || strcmp(argv[1], "-h") == 0)
+                usage(argv0);
+
+        new_root = argv[1];
+        old_root = OLD_ROOT;
+        cmd = CMD;
+
         pid = syscall(SYS_clone, CLONE_NEWPID | CLONE_NEWNS | SIGCHLD,0);
 
         if (pid != 0) {
@@ -99,35 +103,12 @@ int main(int argc, char *argv[])
                 exit(-1);
         }
 
-        argv0 = argv[0];
-        if (argc > 1 && strcmp(argv[1], "-u") == 0) {
-                do_umount = 1;
-                argv++;
-                argc--;
-        } else
-                do_umount = 0;
-
-        if (argc < 2 || strcmp(argv[1], "-h") == 0)
-                usage(argv0);
-
-        new_root = argv[1];
-
-        if (argc > 2)
-                old_root = argv[2];
-        else
-                old_root = OLD_ROOT;
-
-        if (argc > 3)
-                cmd = argv[3];
-        else
-                cmd = CMD;
-
         if (strlen(old_root) + strlen(new_root) >= MAX_PATH-1) {
                 printf("paths too long.\n");
                 return -1;
         }
 
-        snprintf(full_oldroot, MAX_PATH, "%s/%s", new_root, old_root);
+        snprintf(full_oldroot, MAX_PATH, "%s%s", new_root, old_root);
 
         /* jump into the new root directory */
         printf("going into %s\n", new_root);
@@ -138,7 +119,15 @@ int main(int argc, char *argv[])
         }
 
 	// Ensure new mount is on a separate vfsmount
-	check_mount("/", new_root, new_root, NULL, MS_BIND, NULL);
+	check_mount(new_root, "", new_root, NULL, MS_BIND, NULL);
+
+	check_mount("/bin", new_root, "/bin", NULL, MS_BIND, NULL); 
+	check_mount("/usr", new_root, "/usr", NULL, MS_BIND, NULL); 
+	check_mount("/lib", new_root, "/lib", NULL, MS_BIND, NULL); 
+	check_mount("/sbin",new_root, "/sbin", NULL, MS_BIND, NULL); 
+	check_mount("/opt", new_root, "/opt", NULL, MS_BIND, NULL); 
+	check_mount("/sys", new_root, "/sys", NULL, MS_BIND, NULL); 
+	check_mount("/dev", new_root, "/dev", NULL, MS_BIND, NULL); 
 
         /* pivot root */
         printf("switching %s and %s\n", new_root, full_oldroot);
@@ -149,29 +138,24 @@ int main(int argc, char *argv[])
                 exit(ret);
         }
 
-	check_mount(old_root, "bin", "bin", NULL, MS_BIND, NULL); 
-	check_mount(old_root, "usr", "usr", NULL, MS_BIND, NULL); 
-	check_mount(old_root, "lib", "lib", NULL, MS_BIND, NULL); 
-	check_mount(old_root, "tmp", "tmp", NULL, MS_BIND, NULL); 
-	check_mount(old_root, "sbin", "sbin", NULL, MS_BIND, NULL); 
-	check_mount(old_root, "opt", "opt", NULL, MS_BIND, NULL); 
-	check_mount(old_root, "dev", "dev", NULL, MS_BIND, NULL); 
-	check_mount(old_root, "sys", "sys", NULL, MS_BIND, NULL); 
-
-	// Mount a fresh /proc, /etc and /home
-	check_mount("/", "proc", "proc", "proc", 0, NULL); 
-	check_mount("/", "etc", "etc", "ext3", 0, NULL); 
-	check_mount("/", "home", "home", "ext3", 0, NULL); 
-	
-        /* unmount if requested */
-        if (do_umount) {
-                ret = umount2(old_root, MNT_DETACH);
-                if (ret) {
-                        perror("umount");
-                        exit(2);
-                }
+        ret = chdir("/");
+        if (ret) {
+                perror("chdir");
+                exit(2);
         }
 
+	// Mount a new devpts and proc and tmp
+	check_mount("none", "", "/dev/pts", "devpts", 0, NULL); 
+	check_mount("none", "", "/proc", "proc", 0, NULL); 
+	check_mount("none", "", "/tmp", "tmpfs", 0, NULL);
+
+        /* unmount the old_root */
+	ret = umount2(old_root, MNT_DETACH);
+	if (ret) {
+	      perror("umount");
+	      exit(2);
+	}
+        
         /* Execute the command */
         execl(cmd, cmd, NULL);
         perror("execl");
