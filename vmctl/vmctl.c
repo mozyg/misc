@@ -38,6 +38,18 @@
 #define CLONE_NEWPID   0x20000000      /* New pid namespace.  */
 #endif
 
+#ifndef CLONE_NEWIPC
+#define CLONE_NEWIPC	0x08000000	/* New ipcs.  */
+#endif
+
+#ifndef CLONE_NEWUTS
+#define CLONE_NEWUTS	0x04000000	/* New utsname group.  */
+#endif
+
+#ifndef CLONE_NEWUSER
+#define CLONE_NEWUSER	0x10000000	/* New user namespace.  */
+#endif
+
 #ifndef MNT_DETACH
 #define MNT_DETACH  0x00000002
 #endif
@@ -96,7 +108,8 @@ int main(int argc, char *argv[])
         old_root = OLD_ROOT;
         cmd = CMD;
 
-        pid = syscall(SYS_clone, CLONE_NEWPID | CLONE_NEWNS | SIGCHLD,0);
+        pid = syscall(SYS_clone, CLONE_NEWUSER | CLONE_NEWPID | CLONE_NEWNS |
+		      CLONE_NEWUTS | CLONE_NEWIPC | SIGCHLD,0);
 
         if (pid != 0) {
                 waitpid(pid, &ret, 0);
