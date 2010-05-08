@@ -42,6 +42,30 @@ ftext & $481000$ & $556000$ & $11.43\%$ \\ [2pt]
 \label{tab:x_results}
 \end{table}
 
+\subsection{LXC Performance numbers}
+
+\Comment{FINISH THIS}
+Table \ref{tab:lxc_perf}.
+
+\begin{table}[ht]
+{\small
+\hfill{}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multirow{3}{12mm}{Benchmark}    & \multirow{3}{12mm}{Stock\\Kernel} & \multirow{3}{12mm}{Modified\\Kernel} & \multirow{3}{12mm}{Inside a\\Container} \\
+&&&\\
+&&&\\
+\hline
+gcc-apache   & $1229$s      & $1293$s          & $1232$s            \\
+prime number & $522$s       & $590$s           & $581$s             \\
+unzip        & $76$s        & $73.44$s         & $76.29$s           \\
+\hline 
+\end{tabular}}
+\hfill{}
+\caption{ Peformance benchmarks on Linux Containers }
+\label{tab:lxc_perf}
+\end{table}
+
 \subsection{Future Evaluation}
 
 Our goal for this project is to integrate an isolation technique which is usable and is integrated with the mobile device. We propose to evaluate the overhead due to the isolation framework and also ensure correctness using standard benchmarks. In particular, we plan to evaluate the latency involved in running an interactive application and measure how much benefit is obtained due to the shared X server running natively. We also plan to profile the memory and cpu usage overhead entailed by our design and compare the same with the application running natively. The VM Controller will be integrated with the window manager of at least one mobile device and we will demonstrate the ability to start and stop applications using the controller.
