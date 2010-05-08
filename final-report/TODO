@@ -1,0 +1,27 @@
+Add an abstract
+
+Design - Add Linux containers as a separate section
+
+Add subsections for UTSNAME, PID, IPC, USER, NETWORK, /proc, ro bind mount
+
+Add a new subsection for unionfs and copy on write file systems
+
+Implementation
+
+Talk about binary modules, removing version checking etc
+
+Evaluation:
+
+Add gcc and prime number experiments.. 
+
+Add description about the experiments
+
+Future Work:
+
+Live migration
+
+More containers support
+
+Communication between containers
+
+Conclusion 
