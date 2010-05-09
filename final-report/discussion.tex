@@ -1,6 +1,8 @@
 \section{Discussion}
 \label{sec:discuss}
 
+The ARM architecture is not directly virtualizable as there privileged instructions which when executed by the guest operating system, do not trap to the host kernel. There are many existing techniques like dynamic binary translation, trap-and-emulate using hardware extensions, translate to trap, paravirtualization which have been used in existing virtualization solutions for x86. We discuss some of these solutions below and why we believe containers are more suitable for smartphones.
+
 \subsection{QEMU on ARM}
 QEMU \cite{qemu} is one of the more recent, popular and opensource virtual machine monitors that can be used to run operating systems built for different architectures to run on different machines. QEMU relies on dynamic binary translation and has been ported to run on multiple platforms like ARM, PowerPC, i386 etc. Our first implementation used QEMU and attempts to address the initial design goal of evaluating the overhead of dynamic binary translation on a smartphone running an ARM processor. However, we found that the overhead due to dynamic binary translation is quite large without hardware assistance and explore other solutions for providing isolation. We present detailed results from our experiments in \ref{sec:eval}.
 
