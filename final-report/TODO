@@ -13,24 +13,21 @@ Add some design ideas for migration
 
 Implementation:
 Talk about binary modules, removing version checking etc
-Remove cross compilation stuff
 Check X stuff for quality control
-
-Discussion: Move QEMU, KVM, UML to this section
 
 Evaluation:
 Add description about the experiments
 Run Quake benchmark. Get a graph
 Measure CPU and memory overhead in containers
-(Re-run the numbers on one machine without xterm )
+(Re-run the numbers on one machine without xterm or X at all, except where required (are we reporting the x11perf numbers for containers?))
+run lmbench. (talk to shivaram/will about modifying the Makefile appropriately)
 
 Related Work:
 MORE of it.. Fill at least one page with it
 
-Future Work:
-Live migration
-More containers support
-Communication between containers
+Add more to Future Work
 
 Conclusion:
 Throw in the git repo url
+
+

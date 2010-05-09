@@ -1,18 +1,17 @@
 \section{Implementation}
 \label{sec:impl}
-\subsection{Cross-Compilation}
-Nearly all modern smartphones run ARM processors.  On the other hand, nearly all modern desktops run x86 or x86\_64 processors. As a result of the architectural differences, binaries created in normal desktop PC environments will not work on smartphones. Additionally, the devices themselves are rather limited with respect to building code.  Relatively limited cpu, memory, disk, coupled with input and usability concerns make this an unattractive way to compile code.  A number of devices have lacking userspace environments that would make compiling code on them even more difficult.
-Our solution is to use a cross-compilation environment to use a faster desktop to write our code targeting the various mobile platforms.
-We build upon the scratchbox2 environment \cite{sb2}, in particular using the cross-compilation enviroment created by webos-internals \cite{webosinterals}.\\
 
-Scratchbox2 is a cross-compilation engine that uses a combination of emulation and library interposition to make it easier to cross-compile code bases that don't otherwise provide a means to cross-compile.
-The result is almost a virtualized environment that automatically invokes cross-compilation tools as required, abstracting away much of difficulties that cross-compilation can usually entail.\\
-
-Important features in our environment include 1)a system of dependency resolution that allows us to conveniently build and package our applications more easily; 2)staging headers and device libraries such that we can use the same ones that are available on the target device; 3)static or dynamically linked executable compilation.
-This allows us to conveniently build for multiple platforms from the comfort and reliability of our own systems.  Presently we use this to target the Palm Pre as well as android devices, in particular the Motorola G1. \\
-
-\subsection{libc vs bionic}
+\subsection{WebOS vs Android}
+\Comment{ADD MORE HERE}
+\subsubsection{libc vs bionic}
 Despite the fact the Pre and the Android are both running Linux OSes on an ARM chip, the environments they provide for our project are enormously different.  The Pre is bundled with a large suite of common Unix applications and libraries, while the Android diverges, running minimalistic libraries and lacking many common libraries and applications.  Of these differences, the C compiler library is probably the most substantial. The Pre uses an unmodified version of glibc and the Android uses Bionic, a lightweight and small C compiler library.  Many Linux applications have glibc as a dependency, and as a result, builds for the Android must have statically link libraries.  Between this and the lack of useful applications (gdb and other debugging tools) development on the Android has proven much more difficult.  
+
+\subsection{Linux Containers}
+
+\Comment{blurb about containers/small overview or intro to following subsubsections..}
+
+\subsubsection{LXC completeness in 2.6.24}
+\subsubsection{Binary module compatibility}
 
 \subsection{X-Server}
 

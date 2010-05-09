@@ -1,0 +1,10 @@
+\section{Future Work}
+We plan to extend our implementation to support additional features.  
+\subsection{Live Migration}
+Linux Containers supports the pausing and resuming of containers.  This can be extended to allow for live migration.
+
+\subsection{Additional Containers Support}
+Due to the Pre's kernel version of 2.6.24, much of the linux containers functionality had to be back ported in order to work with the Pre's kernel.  The network isolation abstraction is built upon functionality in the 2.6.26 kernel.  This allows bridging of the network hardware, which gives each container its own network abstractions. \\
+
+\subsection{Intra-Container Communications}
+With working network bridging, the containers would be able to communicate with eachother via the network. \\
