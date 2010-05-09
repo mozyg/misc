@@ -20,6 +20,7 @@ Add description about the experiments
 Run Quake benchmark. Get a graph
 Measure CPU and memory overhead in containers
 (Re-run the numbers on one machine without xterm or X at all, except where required (are we reporting the x11perf numbers for containers?))
+run lmbench. (talk to shivaram/will about modifying the Makefile appropriately)
 
 Related Work:
 MORE of it.. Fill at least one page with it
@@ -31,3 +32,5 @@ Communication between containers
 
 Conclusion:
 Throw in the git repo url
+
+
