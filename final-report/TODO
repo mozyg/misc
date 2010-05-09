@@ -1,25 +1,37 @@
 Add an abstract
 
-Design - Add Linux containers as a separate section
+Introduction: Make it fit
+
+Overview: Make it fit. A bit longer ?
+
+Design: 
+Add Linux containers as a separate section
 
 Add subsections for UTSNAME, PID, IPC, USER, NETWORK, /proc, ro bind mount
 
 Add a new subsection for unionfs and copy on write file systems
+Add a DIAGRAM for containers
+Add some design ideas for migration
 
-Implementation
-
+Implementation:
 Talk about binary modules, removing version checking etc
+Remove cross compilation stuff
+Check X stuff for quality control
+
+Discussion: Move QEMU, KVM, UML to this section
 
 Evaluation:
-
 Add description about the experiments
+Run Quake benchmark. Get a graph
+Measure CPU and memory overhead in containers
+
+Related Work:
+MORE of it.. Fill at least one page with it
 
 Future Work:
-
 Live migration
-
 More containers support
-
 Communication between containers
 
-Conclusion 
+Conclusion:
+Throw in the git repo url
