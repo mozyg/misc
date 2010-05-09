@@ -16,8 +16,6 @@ Talk about binary modules, removing version checking etc
 Remove cross compilation stuff
 Check X stuff for quality control
 
-Discussion: Move QEMU, KVM, UML to this section
-
 Evaluation:
 Add description about the experiments
 Run Quake benchmark. Get a graph
