@@ -5,7 +5,11 @@ Overview: Make it fit. A bit longer ?
 Design: 
 Add Linux containers as a separate section
 
-Add subsections for UTSNAME, PID, IPC, USER, NETWORK, /proc, ro bind mount
+Add subsections for
+ USER,
+ NETWORK,
+ /proc,
+ ro bind mount
 
 Add a new subsection for unionfs and copy on write file systems
 Add a DIAGRAM for containers
@@ -16,9 +20,16 @@ Check X stuff for quality control
 
 Evaluation:
 Add description about the experiments
+
+Kevin-
 Run Quake benchmark. Get a graph
+
+Shivaram-
 Measure CPU and memory overhead in containers
+
 (Re-run the numbers on one machine without xterm or X at all, except where required (are we reporting the x11perf numbers for containers?))
+
+Kevin -
 run lmbench. (talk to shivaram/will about modifying the Makefile appropriately)
   - To run lmbench, pull in the source tree from misc.git
   - cd src and then make results
