@@ -19,7 +19,7 @@ Evaluation:
 Add description about the experiments
 Run Quake benchmark. Get a graph
 Measure CPU and memory overhead in containers
-(Re-run the numbers on one machine without xterm )
+(Re-run the numbers on one machine without xterm or X at all, except where required (are we reporting the x11perf numbers for containers?))
 
 Related Work:
 MORE of it.. Fill at least one page with it
