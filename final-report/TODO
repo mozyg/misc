@@ -21,6 +21,8 @@ Run Quake benchmark. Get a graph
 Measure CPU and memory overhead in containers
 (Re-run the numbers on one machine without xterm or X at all, except where required (are we reporting the x11perf numbers for containers?))
 run lmbench. (talk to shivaram/will about modifying the Makefile appropriately)
+  - To run lmbench, pull in the source tree from misc.git
+  - cd src and then make results
 
 Related Work:
 MORE of it.. Fill at least one page with it
