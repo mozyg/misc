@@ -13,7 +13,6 @@ Add some design ideas for migration
 
 Implementation:
 Talk about binary modules, removing version checking etc
-Remove cross compilation stuff
 Check X stuff for quality control
 
 Evaluation:
