@@ -24,6 +24,7 @@ Evaluation:
 Add description about the experiments
 Run Quake benchmark. Get a graph
 Measure CPU and memory overhead in containers
+(Re-run the numbers on one machine without xterm )
 
 Related Work:
 MORE of it.. Fill at least one page with it
