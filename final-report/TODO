@@ -2,14 +2,8 @@ Introduction: Make it fit
 
 Overview: Make it fit. A bit longer ?
 
-Design: 
-Add Linux containers as a separate section
-
-Add subsections for
- USER,
- NETWORK,
+Design: Add subsections for
  /proc,
- ro bind mount
 
 Add a new subsection for unionfs and copy on write file systems
 Add a DIAGRAM for containers
