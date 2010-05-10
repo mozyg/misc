@@ -6,7 +6,6 @@ Design: Add subsections for
  /proc,
 
 Add a new subsection for unionfs and copy on write file systems
-Add a DIAGRAM for containers
 Add some design ideas for migration
 
 Implementation:
