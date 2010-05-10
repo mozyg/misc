@@ -1,12 +1,12 @@
-\section{Design Overview}
-\label{sec:overview}
-
-\begin{figure*}[tb]
+\begin{figure*}[bth]
 \centering
 \includegraphics[width=1.5\columnwidth]{arch}
 \caption{Architecture diagram}
 \label{fig:arch}
 \end{figure*}
+
+\section{Design Overview}
+\label{sec:overview}
 
 \label{sec:proposedarch}
 Our architecture has two main components: the virtualization framework, and the integration front-end.  The virtualization framework contains the hypervisor (KVM, UserMode Linux, or L4 based) or a container-ready kernel (Linux Containers-LXC) as well as each of the spawned VMs or containers (see Figure \ref{fig:arch}).  A VM would contain a thin OS for running the third-party application and a container could contain one or more applications.  Initially we intended to explore both x86-based Operating Systems as well as ARM based systems.  However, initial results show that x86-based Operating Systems will be far too slow.  Although an x86-based OS would have enabled a more diverse set of target applications, ARM-based systems have less virtualization overhead and some options may not be prohibitively slow. \\
@@ -18,3 +18,4 @@ A shared X-server removes rendering overhead from each VM or container and reduc
 We aim to make the virtualization framework device independent, which is important because we anticipate this to be the more complex component. The integration front-end will have to be ported for each new device we support, but we will strive to make its implementation simple. Our first implementation focuses on one particular device and OS and support  migration of applications from desktops. \\
 
 In summary, we leverage an existing virtualization environment to build a secure, usable and portable framework for mobile device virtualization. Our contributions are focused on providing the ability for live migration of applications with deep integration to the mobile device. Our proposed security model is an effective method to isolate applications and we find that our design ideas are similar to other recent efforts \cite{grier2008secure} in isolating untrusted code.
+

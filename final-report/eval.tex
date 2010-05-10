@@ -42,6 +42,13 @@ ftext & $481000$ & $556000$ & $11.43\%$ \\ [2pt]
 \label{tab:x_results}
 \end{table}
 
+\begin{figure}[tbh]
+\centering
+\includegraphics[width=1.0\columnwidth]{perf}
+\caption{Running time comparison}
+\label{fig:perf}
+\end{figure}
+
 \subsection{LXC Performance numbers}
 
 Our addition of the linux container functionality to the kernel imposed no noticeable overhead to the phone.  Our testing (\ref{sec:lxc_perf}) proved that i/o, cpu, and memory performance was unaffected by the addition of the container code.  There was no overhead to running inside a container as well.
