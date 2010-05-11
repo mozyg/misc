@@ -27,6 +27,9 @@ run lmbench. (talk to shivaram/will about modifying the Makefile appropriately)
   - To run lmbench, pull in the source tree from misc.git
   - cd src and then make results
 
+Discussion:
+Quality control and make it fit
+
 Related Work:
 MORE of it.. Fill at least one page with it
 
