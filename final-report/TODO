@@ -21,9 +21,6 @@ MORE of it.. Fill at least one page with it
 
 Add more to Future Work
 
-Conclusion:
-Throw in the git repo url
-
 review all items marked as 'comment' in the paper.
 
 ------
@@ -45,3 +42,5 @@ Kevin -
 run lmbench. (talk to shivaram/will about modifying the Makefile appropriately)
   - To run lmbench, pull in the source tree from misc.git
   - cd src and then make results
+
+clean up conclusion
