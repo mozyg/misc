@@ -30,11 +30,12 @@ Process identifiers (PIDs) are isolated using PID namespaces such that with resp
 Inter-Process Communication (IPC) between processes uses shared objects like shared memory segments, message queues etc. To create isolated environments, it is necessary that processes from one container cannot share data or communicate with other containers. This is achieved by introducing IPC namespaces which creates separate set of IPC objects for each container.
 
 \subsection{User Namespaces}
-\Comment{Oops.. this should be about user namespaces and not UTSname.. }
-Utsname namespaces were first available in Linux kernel 2.6.19.  Utsname supplies information about a system's hostname.  With Utsname, different processes can be associated with different hostnames, and jobs being migrated can take their hostnames with them.
+User namespaces were first available in Linux kernel 2.6.23.  User namespaces supplies additional uid tables in order to allow a uid to be user specific.  With user namespaces, different processes can be associated with the same uid across different users.
 
-\subsection{Network Devices}
-The Linux kernel 2.6.26 was the first version to include network namespaces.  The network namespaces assigns a private set of network resources, including IP addresses, routes, sockets, and more, to any number of processes.  This allows for shared names among different namespaces and isolation between those namespaces.  This provides substantial improvements in security, network resource management, namespace consolidation, and mobility.
+\subsection{Network Devices}The Linux kernel 2.6.26 was the first version to include network namespaces.  The network namespaces assigns a private set of network resources, including IP addresses, routes, sockets, and more, to any number of processes.  This allows for shared names among different namespaces and isolation between those namespaces.  This provides substantial improvements in security, network resource management, namespace consolidation, and mobility.
+
+\subsection{\\Proc Namespaces}
+\Comment{I can't find good documentation of this, could one of you guys do this one?}
 
 \subsection{Readonly-bind mounts}
 Readonly-bind mounts have been available since Linux kernel 2.6.24.  This allows for read-only accesses to a filesystem mounted read-write.  It guarantees that one process can read and write to the filesystem, while others can only write to it, regardless of their privileges.
