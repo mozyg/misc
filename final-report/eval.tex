@@ -51,7 +51,7 @@ ftext & $481000$ & $556000$ & $11.43\%$ \\ [2pt]
 
 \subsection{LXC Performance numbers}
 
-Our addition of the linux container functionality to the kernel imposed no noticeable overhead to the phone.  Our testing (\ref{sec:lxc_perf}) and (\ref{sec:Quake}) proved that both the container kernel as well as the containers themselves, added no overhead to execution times.  More detailed testing with lmbench3 (\ref{sec:Lmbench3})proved that i/o, cpu, and memory performance were unaffected by the addition of the container code.  There was no overhead to running inside a container as well.  
+Our addition of the linux container functionality to the kernel imposed no noticeable overhead to the phone.  Our testing (\ref{sec:lxc_perf}) and (\ref{sec:Quake}) proved that both the container kernel as well as the containers themselves, added no overhead to execution times.  More detailed testing with LMbench3 (\ref{sec:Lmbench3})proved that i/o, cpu, and memory performance were unaffected by the addition of the container code.  There was no overhead to running inside a container as well.  
 
 \begin{table}[ht]
 {\small
@@ -79,8 +79,8 @@ unzip        & $76$s        & $73.44$s         & $76.29$s           \\
 \label{fig:Quake}
 \end{figure}
 
-\subsection{Lmbench3}
-Our general benchmarks showed that there was no reduction in throughput with the addition of the containers.  We felt that more thorough testing was in order to determine if there was any overhead pertaining to latencies, context switching, and the file system.
+\subsection{LMbench3}
+Our general benchmarks showed that there was no reduction in throughput with the addition of the containers.  We felt that more thorough testing was in order to determine if there was any overhead pertaining to latencies, context switching, and the file system.  LMbench3 is the most mature and commonly used among the LMbench family.  It runs a wide variety of tests, ranging from intensive latency testing of cache misses to extensive context switching testing.  LMbench has been heavily used in industry as well as acadamia \cite{lmbench}.
 
 \subsection{Future Evaluation}
 
