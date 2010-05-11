@@ -1,6 +1,13 @@
 all: paper.pdf
 
-paper.pdf: *.tex *.bib
+GRAPHS=$(wildcard *.graph)
+
+PDFGRAPHS=$(GRAPHS:.graph=.pdf)
+
+%.pdf: %.graph
+	./bargraph.pl -pdf $^ > $@
+
+paper.pdf: *.tex *.bib $(PDFGRAPHS)
 	pdflatex paper
 	bibtex paper
 	pdflatex paper
@@ -11,6 +18,7 @@ spellcheck:
 	for i in *.tex; do aspell -c "$$i"; done
 
 clean:
-	rm -f *.bak
-	rm -f *~
-	rm -f paper.pdf paper.log paper.aux* paper.bbl paper.blg
+	-rm -f *.bak
+	-rm -f *~
+	-rm -f paper.pdf paper.log paper.aux* paper.bbl paper.blg
+	-rm $(PDFGRAPHS)
