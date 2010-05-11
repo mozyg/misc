@@ -14,18 +14,7 @@ Check X stuff for quality control
 Evaluation:
 Add description about the experiments
 
-Kevin-
-Run Quake benchmark. Get a graph
-
-Shivaram-
-Measure CPU and memory overhead in containers
-
 (Re-run the numbers on one machine without xterm or X at all, except where required (are we reporting the x11perf numbers for containers?))
-
-Kevin -
-run lmbench. (talk to shivaram/will about modifying the Makefile appropriately)
-  - To run lmbench, pull in the source tree from misc.git
-  - cd src and then make results
 
 Discussion:
 Quality control and make it fit
@@ -39,3 +28,21 @@ Conclusion:
 Throw in the git repo url
 
 review all items marked as 'comment' in the paper.
+
+------
+
+REVIEW EVERYTHING!!!
+
+----
+IN PROGRESS
+
+Kevin-
+Run Quake benchmark. Get a graph
+
+Shivaram-
+Measure CPU and memory overhead in containers
+
+Kevin -
+run lmbench. (talk to shivaram/will about modifying the Makefile appropriately)
+  - To run lmbench, pull in the source tree from misc.git
+  - cd src and then make results
