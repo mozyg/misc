@@ -13,8 +13,6 @@ Check X stuff for quality control
 Evaluation:
 Add description about the experiments
 
-(Re-run the numbers on one machine without xterm or X at all, except where required (are we reporting the x11perf numbers for containers?))
-
 Discussion:
 Quality control and make it fit
 
