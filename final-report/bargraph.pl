@@ -1229,7 +1229,7 @@ if ($output eq "fig") {
 } elsif ($output eq "eps") {
     $fig2dev = "$fig2dev_path -L eps -n \"$title\"";
 } elsif ($output eq "pdf") {
-    $fig2dev = "$fig2dev_path -L pdf -n \"$title\"";
+    $fig2dev = "$fig2dev_path -L pdf -p dummy -n \"$title\"";
 } elsif ($output eq "png") {
     $fig2dev = "$fig2dev_path -L png -m 2";
     $fig2dev .= " | convert -transparent white - - " if ($png_transparent);
