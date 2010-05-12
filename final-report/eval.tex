@@ -2,6 +2,7 @@
 \label{sec:eval}
 
 \subsection{X-Server numbers}
+\label{sec:x_eval}
 
 An important part of our system is the X server to visualize and interact with the applications.  While our current design is somewhat limited in that it has too many layers of abstractions (using SDL as the backend), we have taken efforts to make the server run faster, which resulted in a much better user experience.  The biggest  performance improvement was moving from basic SDL to SDL-GLESv2 which improved the ``feel'' of X and the applications inside of it noticeably.  To try to capture this speed improvement we ran x11perf, which helps quantify the performance improvements.  As shown in Table \ref{tab:x_results}, there was noticeable improvements in a number of tests.
 These tests we run from a Debian chroot, using localhost communication (not domain sockets) with the server, on the Palm Pre.  The tests were arbitrarily selected, with an attempt at finding representative ones.  These numbers should only be taken as illustrating the general performance improvements, not as an accurate measure of what real applications will be like.
@@ -35,54 +36,23 @@ ftext & $481000$ & $556000$ & $11.43\%$ \\ [2pt]
 
 Our addition of the linux container functionality to the kernel imposed no noticeable overhead to the phone.  Our testing (\ref{tab:lxc_perf}) proved that both the container kernel as well as the containers themselves, added no overhead to execution times.  More detailed testing with LMbench3 (\ref{sec:LMbench3})proved that i/o, cpu, and memory performance were unaffected by the addition of the container code.  There was no overhead to running inside a container as well.  
 
-\begin{table}[ht]
-{\small
-\hfill{}
-\begin{tabular}{|l|c|c|c|}
-\hline
-\multirow{3}{12mm}{Benchmark}    & \multirow{3}{12mm}{Stock\\Kernel} & \multirow{3}{12mm}{Modified\\Kernel} & \multirow{3}{12mm}{Inside a\\Container} \\
-&&&\\
-&&&\\
-\hline
-gcc-apache   & $1229$s      & $1293$s          & $1232$s            \\
-prime number & $522$s       & $590$s           & $581$s             \\
-unzip        & $76$s        & $73.44$s         & $76.29$s           \\
-\hline 
-\end{tabular}}
-\hfill{}
-\caption{ Peformance benchmarks on Linux Containers }
-\label{tab:lxc_perf}
-\end{table}
-
 \begin{figure}[tbh]
 \centering
 \includegraphics[width=1.0\columnwidth]{quake}
-\caption{Execution Time and Frames Per Second (FPS)}
+\caption{Execution Time for the Quake time-demo}
 \label{fig:Quake}
 \end{figure}
 
 \subsection{LMbench3} 
 \label{sec:LMbench3}
+
+\begin{figure*}[bth]
+\centering
+\includegraphics[width=1.0\columnwidth]{lmbench}
+\caption{Normalized results from lmbench}
+\label{fig:lmbench}
+\end{figure*}
+
 Our general benchmarks showed that there was no reduction in throughput with the addition of the containers.  We felt that more thorough testing was in order to determine if there was any overhead pertaining to latencies, context switching, and the file system.  LMbench3 is the most mature and commonly used among the LMbench family.  It runs a wide variety of tests, ranging from intensive latency testing of cache misses to extensive context switching testing.  LMbench has been heavily used in industry as well as acadamia \cite{lmbench}. \\
 
 LMbench contains a suite of simple, portable benchmarks, comparing the performance of various UNIX systems.  It includes a variety of bandwidth benchmarks, of which the most popular are: cached file reads, memory operations (copy, read, and write), pipe, and TCP.  Additionally , it supports a wide variety of latency benchmarks, including: context switching, network connection establishment (pipe, TCP, UDP, RPC), file system operations (creates and deletes), process creation, handling of signals, system call overhead, and memory read latencies.  Lmbench also supports a variety of multiprocessor tests and includes large databases of results to compare one's results to. \cite{lmbench_paper}
-
-\begin{table*}[htb]
-{\small
-\hfill{}
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
-\hline Benchmark & syscall & read & write & fstat & open/close & fork & fork+execve & fork+sh \\ 
-\hline
-Stock Kernel & 0.582 & 2.43 & 2.17 & 1.92 & 10.73 & 1030.45 & 3527.44 & 12552.8 \\
-Modified Kernel & 0.581 & 2.33 & 2.15 & 1.59 & 10.88 & 1118.2 & 3594.18 & 12865.8 \\
-Inside a container & 0.551 & 2.23 & 2.03 & 1.45 & 10.26 & 1076.55 & 3510.92 & 12497.5 \\ 
-\hline 
-\end{tabular}}
-\hfill{}
-\caption{ LMBench results - In Microseconds }
-\label{tab:lmbench_results}
-\end{table*}
-
-\subsection{Future Evaluation}
-
-Our goal for this project is to integrate an isolation technique which is usable and is integrated with the mobile device. We propose to evaluate the overhead due to the isolation framework and also ensure correctness using standard benchmarks. In particular, we plan to evaluate the latency involved in running an interactive application and measure how much benefit is obtained due to the shared X server running natively. We also plan to profile the memory and cpu usage overhead entailed by our design and compare the same with the application running natively. The VM Controller will be integrated with the window manager of at least one mobile device and we will demonstrate the ability to start and stop applications using the controller.

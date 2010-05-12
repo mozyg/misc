@@ -1,0 +1,15 @@
+=cluster Stock-Kernel Modified-Kernel Inside-Container
+=norotate
+=table
+max=1.8
+extraops=set size 1,0.6
+intra_space_mul=3.0
+yformat=%0.2f
+syscall 1 0.998872 0.947577
+read 1 0.959608 0.915411
+write 1 0.990153 0.936194
+open/close 1 1.01415 0.956163
+fork+exit 1 1.08516 1.04474
+fork+exec 1 1.01892 0.995316
+fork+sh 1 1.02493 0.995597
+#fstat 1 0.827197 0.75361
