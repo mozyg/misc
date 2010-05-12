@@ -62,7 +62,9 @@ unzip        & $76$s        & $73.44$s         & $76.29$s           \\
 \end{figure}
 
 \subsection{LMbench3}
-Our general benchmarks showed that there was no reduction in throughput with the addition of the containers.  We felt that more thorough testing was in order to determine if there was any overhead pertaining to latencies, context switching, and the file system.  LMbench3 is the most mature and commonly used among the LMbench family.  It runs a wide variety of tests, ranging from intensive latency testing of cache misses to extensive context switching testing.  LMbench has been heavily used in industry as well as acadamia \cite{lmbench}.
+Our general benchmarks showed that there was no reduction in throughput with the addition of the containers.  We felt that more thorough testing was in order to determine if there was any overhead pertaining to latencies, context switching, and the file system.  LMbench3 is the most mature and commonly used among the LMbench family.  It runs a wide variety of tests, ranging from intensive latency testing of cache misses to extensive context switching testing.  LMbench has been heavily used in industry as well as acadamia \cite{lmbench}. \\
+
+LMbench contains a suite of simple, portable benchmarks, comparing the performance of various UNIX systems.  It includes a variety of bandwidth benchmarks, of which the most popular are: cached file reads, memory operations (copy, read, and write), pipe, and TCP.  Additionally , it supports a wide variety of latency benchmarks, including: context switching, network connection establishment (pipe, TCP, UDP, RPC), file system operations (creates and deletes), process creation, handling of signals, system call overhead, and memory read latencies.  Lmbench also supports a variety of multiprocessor tests and includes large databases of results to compare one's results to. \cite{lmbench_paper}
 
 \begin{table*}[htb]
 {\small
