@@ -1,32 +1,4 @@
-Overview: Make it fit. A bit longer ?
-
-intro: review!
-
-design: review!
-Add some design ideas for migration
-
-implementation:
-more on webos vs android
-clean up lxc and module compatability section
-
-Evaluation:
-Add description about the experiments
-
-Related Work:
-MORE of it.. Fill at least one page with it
-
-review all items marked as 'comment' in the paper.
-
 Evaluation:
 Describe experiments in a more exact fashion.
 
-Discussion:
-Quality control and make it fit
-
-------
-
 REVIEW EVERYTHING!!!
-
-----
-IN PROGRESS
-

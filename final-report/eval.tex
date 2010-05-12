@@ -19,6 +19,10 @@ ftext & $481000$ & $556000$ & $11.43\%$ \\ [2pt]
 \label{tab:x_results}
 \end{table}
 
+\subsection{Testing methodology}
+
+All numbers we report were run at least 3 times and averaged.  Unless explicitly mentioned otherwise, variation was nominal.
+
 \subsection{X-Server numbers}
 \label{sec:x_eval}
 
@@ -36,9 +40,9 @@ These tests we run from a Debian chroot, using localhost communication (not doma
 \subsection{LXC Performance numbers}
 In this section, we measure the overhead of our modifications to the kernel and the overhead due to running processes inside a container. Figure \ref{fig:perf} plots the running time of the following applications:
 \begin{itemize}
-    \item Compiling apache server
+    \item Compiling apache server version 2.2.15
     \item Finding prime numbers between 0 and 500,000
-    \item Unzipping a 200MB file.
+    \item Unzipping a 206.9MB file.
 \end{itemize}
 From the figure, we can see that the overhead is approximately within 5\%-10\% and that running a process within a container does not significantly increase the running time.
 
