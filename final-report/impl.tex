@@ -22,15 +22,15 @@ We made a number of important design decisions, many of which were in response t
 \footnotetext[1]{http://wdtz.org/cs523/}\\
 
 \subsubsection{DDX}
-The X-Server architecture contains multiple Device Dependent X (DDX) implementations.  The most used one is `xfree86', but there are others, such as `kdrive' \cite{x_glossary}.  We chose to use kdrive because of the Xsdl components it contains, which allows one to run X using SDL as a backend.  Unfortunately Xsdl is so out of date that it was recently removed from the X project altogether due to being broken and unmaintained. \\
+The X-Server architecture contains multiple Device Dependent X (DDX) implementations.  The most used one is `xfree86', but there are others, such as `kdrive' \cite{x_glossary}.  We chose to use kdrive because of the Xsdl functionality it contains, which allows one to run X using SDL as a backend.  Unfortunately Xsdl is so out of date that it was recently removed from the X project altogether due to being broken and unmaintained. \\
 
-From X version control: ``if anyone uses this in production, a big scary monster will eat them'' \cite{x_quote}.  The result of this was much work spending fixing Xsdl and bringing it up to date to work with the rest of X.  Fixes including interactions with the X server, as well as fixing the rendering code and the input handling. \\
+From X version control: ``if anyone uses this in production, a big scary monster will eat them'' \cite{x_quote}.  The unfortunate result of this was much work spent fixing Xsdl and bringing it up to date, in order to work with the rest of X.  Fixes including interactions with the X server, as well as fixing the rendering code and the input handling. \\
 
 \subsubsection{SDL and GLES}
-As described above, the code we started with used Simple DirectMedia Layer (SDL) \cite{sdl} for input and rendering.  Once we had achieved this functionality, we noticed the display lagged when doing even basic things like moving the cursor.  Previous experience working with SDL on this device suggested that using GLESv2 \cite{gles} and custom shaders would improve a task even as simple as blitting, so we ported the rendering bits to use GLESv2. \\
+As described above, the code we started with \Comment{Palm Pre code or kdrive code?} used Simple DirectMedia Layer (SDL) \cite{sdl} for input and rendering.  Once we had achieved this functionality, we noticed the display lagged when doing even basic things like moving the cursor.  Previous experience working with SDL on this device suggested that using GLESv2 \cite{gles} and custom shaders would improve a task even as simple as blitting \Comment{define}, so we ported the rendering bits to use GLESv2. \\
 
 \subsubsection{Devices that don't support SDL}
-Although the Pre has support for SDL, many devices don't, and that's something we've taken into consideration.  The kdrive structure can be made rather portable: at it's heart it just needs something that can render a pixelbufer, and feed it input (either event driven or by polling).  This means that we could potentially support Android devices through Java Native Interface (JNI) \cite{jni} passing the buffer to a java application to blit and the java application blitting to the screen, as well as gathering input and feeding it to the X server. \\
+Although the Pre has support for SDL, many devices do not, and that is something we have taken into consideration.  The kdrive structure can be made rather portable: at it's heart it just needs something that can render a pixelbufer, and feed it input (either event driven or by polling).  This means that we could potentially support Android devices through Java Native Interface (JNI) \cite{jni} passing the buffer to a java application to blit and the java application blitting to the screen, as well as gathering input and feeding it to the X server. \\
 
 \subsubsection{Keyboard}
 Keyboard support is very important when using applications.  However it was a stumbling block for us for two main reasons: 1) mapping SDL to something the X server can use 2) adding support for keys and features that are not on the original device.\\
@@ -43,6 +43,8 @@ The second issue is that many keys that are required for doing something as simp
 A primary goal of our project is to cleanly integrate into the host X server.  While our current implementation is a great step and does integrate as a window in the existing windowing system for the device, there is an issue.  Presently the X server will render everything into one window (see Figure \ref{fig:x_screenie}), which requires a window manager to manage the windows.  This is bad both because it is hard to use but also because it is a hard break from the goal of integrating with the parent window manager--now the user has to think about it as two separate systems.\\
 
 One solution to this is to take advantage of the work done on rootless X \cite{rootless}.  ``The generic rootless layer allows an X server to be implemented on top of another window server in a cooperative manner. This allows the X11 windows and native windows of the underlying window server to coexist on the same screen. The layer is called ``rootless'' because the root window of the X server is generally not drawn. Instead, each top-level child of the root window is represented as a separate on-screen window by the underlying window server'' \cite{rootless}.\\
+
+\Comment{multiwindow}
 
 Another idea is to take advantage of standard X notification events \cite{notifications} and hook into mobile device notification systems, which both WebOS and Android support. \\
 
