@@ -1,6 +1,7 @@
 =cluster Stock-Kernel Modified-Kernel Inside-Container
 colors=dark_green,red,blue
 =norotate
+fontsz=14
 ylabel=Time in seconds
 #=patterns
 =table

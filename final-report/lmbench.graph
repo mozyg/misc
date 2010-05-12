@@ -1,5 +1,6 @@
 =cluster Stock-Kernel Modified-Kernel Inside-Container
 =norotate
+fontsz=12
 =table
 max=1.8
 extraops=set size 1,0.6
