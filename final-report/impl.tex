@@ -1,11 +1,11 @@
 \section{Implementation}
 \label{sec:impl}
 
-\subsection{WebOS vs Android}
-\Comment{ADD MORE HERE}
-\subsubsection{libc vs bionic}
-Despite the fact the Pre and the Android are both running Linux OSes on an ARM chip, the environments they provide for our project are enormously different.  The Pre is bundled with a large suite of common Unix applications and libraries, while the Android diverges, running minimalistic libraries and lacking many common libraries and applications.  Of these differences, the C compiler library is probably the most substantial. The Pre uses an unmodified version of glibc and the Android uses Bionic, a lightweight and small C compiler library.  Many Linux applications have glibc as a dependency, and as a result, builds for the Android must have statically link libraries.  Between this and the lack of useful applications (gdb and other debugging tools) development on the Android has proven much more difficult.  \\
-
+%%% \subsection{WebOS vs Android}
+%%% \Comment{ADD MORE HERE}
+%%% \subsubsection{libc vs bionic}
+%%% Despite the fact the Pre and the Android are both running Linux OSes on an ARM chip, the environments they provide for our project are enormously different.  The Pre is bundled with a large suite of common Unix applications and libraries, while the Android diverges, running minimalistic libraries and lacking many common libraries and applications.  Of these differences, the C compiler library is probably the most substantial. The Pre uses an unmodified version of glibc and the Android uses Bionic, a lightweight and small C compiler library.  Many Linux applications have glibc as a dependency, and as a result, builds for the Android must have statically link libraries.  Between this and the lack of useful applications (gdb and other debugging tools) development on the Android has proven much more difficult.  \\
+%%% 
 \subsection{LXC and module compatibility}
 
 \Comment{CLEANUP}
