@@ -1,0 +1,16 @@
+=cluster Stock-Kernel Modified-Kernel Inside-Container
+=norotate
+=table
+max=1.4
+extraops=set size 1,0.6
+intra_space_mul=3.0
+yformat=%0.2f
+
+0kcreate 1 1.014 1.03296
+0kdelete 1 1.01782 1.06652
+1kcreate 1 0.995737 1.04601
+1kdelete 1 0.990532 1.05384
+4kcreate 1 0.998484 1.06683
+4kdelete 1 1.04081 1.07091
+10kcreate 1 1.14635 1.14083
+10kdelete 1 1.19541 1.24873
