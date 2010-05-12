@@ -45,22 +45,18 @@ In this section, we measure the overhead of our modifications to the kernel and 
     \item Unzipping a 206.9MB file.
 \end{itemize}
 From the figure, we can see that the overhead is approximately within 5\%-10\% and that running a process within a container does not significantly increase the running time.
-
 %Our addition of the linux container functionality to the kernel imposed no noticeable overhead to the phone.  Our testing (Figure \ref{fig:perf}) proved that both the container kernel as well as the containers themselves, added no overhead to execution times.  
 
 \begin{figure}[tbh]
 \centering
-\includegraphics[width=1.0\columnwidth]{quake}
+\includegraphics[width=0.9\columnwidth]{quake}
 \caption{Execution Time for the Quake time-demo}
 \label{fig:Quake}
 \end{figure}
 
 \subsection{Quake Time-Demo}
 \label{sec:quake_demo}
-To measure the overhead of communicating from the container to an X-server running natively, we run the Quake timedemo \Comment{need ref}. The quake binaries were obtained from a Palm Pre port of the libsdl.org implementation and the command used to run the experiments was "quake +timedemo demo2". Figure \ref{fig:Quake} presents the running time of the demo in different scenarios. From the graph, we can see that the running time is similar for the stock kernel and the modified kernel. When the experiment is run from within the container, we observe that the running time increases by about 60\%. We attribute this to the fact that the containers are configured to create a new namespace for IPC and hence the application communicates with the X-Server through the loopback interface. When the containers are launched without a isolated IPC namespaces, we find that the performance is similar to that of the stock kernel.
-
-\subsection{LMbench3} 
-\label{sec:LMbench3}
+To measure the overhead of communicating from the container to an X-server running natively, we run the Quake timedemo. The quake binaries were obtained from a Palm Pre port of the libsdl.org implementation and the command used to run the experiments was "quake +timedemo demo2". Figure \ref{fig:Quake} presents the running time of the demo in different scenarios. From the graph, we can see that the running time is similar for the stock kernel and the modified kernel. When the experiment is run from within the container, we observe that the running time increases by about 60\%. We attribute this to the fact that the containers are configured to create a new namespace for IPC and hence the application communicates with the X-Server through the loopback interface. When the containers are launched without a isolated IPC namespaces, we find that the performance is similar to that of the stock kernel.
 
 \begin{figure*}[bth]
 \centering
@@ -69,6 +65,8 @@ To measure the overhead of communicating from the container to an X-server runni
 \label{fig:lmbench}
 \end{figure*}
 
+\subsection{LMbench3} 
+\label{sec:LMbench3}
 Our earlier experiments showed that there was no significant increase in the end-to-end running time of applications running inside a container.  We further run micro-benchmarks on the system in order to determine if there is any overhead pertaining to process creation, context switching, or creating files.
 
 LMbench contains a suite of simple, portable benchmarks and is useful for comparing the performance of various UNIX systems.  It includes a variety of bandwidth benchmarks, of which the most popular are: cached file reads, memory operations (copy, read, and write), pipe, and TCP.  Additionally , it supports a wide variety of latency benchmarks, including: context switching, network connection establishment (pipe, TCP, UDP, RPC), file system operations (creates and deletes), process creation, handling of signals, system call overhead, and memory read latencies.  Lmbench also supports a variety of multiprocessor tests and includes large databases of results to compare one's results to. \cite{lmbench_paper}. LMbench3 is the most mature and commonly used benchmark among the LMbench family.  It runs a wide variety of tests, ranging from intensive latency testing of cache misses to extensive context switching testing.  LMbench has been heavily used in industry as well as academia \cite{lmbench}.
