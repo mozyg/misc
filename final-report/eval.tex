@@ -34,7 +34,12 @@ These tests we run from a Debian chroot, using localhost communication (not doma
 
 %More detailed testing with LMbench3 (Section \ref{sec:LMbench3})proved that i/o, cpu, and memory performance were unaffected by the addition of the container code.  There was no overhead to running inside a container as well.  
 \subsection{LXC Performance numbers}
-In this section, we measure the overhead of our modifications to the kernel and the overhead due to running processes inside a container. Figure \ref{fig:perf} plots the running time of the following applications:a. Compiling apache server, b.Finding prime numbers between 0 and 500,000 c.Unzipping a 200MB file.
+In this section, we measure the overhead of our modifications to the kernel and the overhead due to running processes inside a container. Figure \ref{fig:perf} plots the running time of the following applications:
+\begin{itemize}
+    \item Compiling apache server
+    \item Finding prime numbers between 0 and 500,000
+    \item Unzipping a 200MB file.
+\end{itemize}
 From the figure, we can see that the overhead is approximately within 5\%-10\% and that running a process within a container does not significantly increase the running time.
 
 %Our addition of the linux container functionality to the kernel imposed no noticeable overhead to the phone.  Our testing (Figure \ref{fig:perf}) proved that both the container kernel as well as the containers themselves, added no overhead to execution times.  
