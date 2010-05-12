@@ -2,9 +2,6 @@ Overview: Make it fit. A bit longer ?
 
 intro: review!
 
-Design: Add subsections for
- /proc,
-
 Add a new subsection for unionfs and copy on write file systems
 Add some design ideas for migration
 
@@ -18,6 +15,9 @@ Add more to Future Work
 
 review all items marked as 'comment' in the paper.
 
+Discussion:
+Quality control and make it fit
+
 ------
 
 REVIEW EVERYTHING!!!
@@ -25,9 +25,3 @@ REVIEW EVERYTHING!!!
 ----
 IN PROGRESS
 
-Shivaram-
-Measure CPU and memory overhead in containers
-
-
-Discussion:
-Quality control and make it fit
