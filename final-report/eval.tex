@@ -33,7 +33,7 @@ ftext & $481000$ & $556000$ & $11.43\%$ \\ [2pt]
 
 \subsection{LXC Performance numbers}
 
-Our addition of the linux container functionality to the kernel imposed no noticeable overhead to the phone.  Our testing (\ref{sec:lxc_perf}) and (\ref{sec:Quake}) proved that both the container kernel as well as the containers themselves, added no overhead to execution times.  More detailed testing with LMbench3 (\ref{sec:Lmbench3})proved that i/o, cpu, and memory performance were unaffected by the addition of the container code.  There was no overhead to running inside a container as well.  
+Our addition of the linux container functionality to the kernel imposed no noticeable overhead to the phone.  Our testing (\ref{tab:lxc_perf}) proved that both the container kernel as well as the containers themselves, added no overhead to execution times.  More detailed testing with LMbench3 (\ref{sec:LMbench3})proved that i/o, cpu, and memory performance were unaffected by the addition of the container code.  There was no overhead to running inside a container as well.  
 
 \begin{table}[ht]
 {\small
@@ -61,7 +61,8 @@ unzip        & $76$s        & $73.44$s         & $76.29$s           \\
 \label{fig:Quake}
 \end{figure}
 
-\subsection{LMbench3}
+\subsection{LMbench3} 
+\label{sec:LMbench3}
 Our general benchmarks showed that there was no reduction in throughput with the addition of the containers.  We felt that more thorough testing was in order to determine if there was any overhead pertaining to latencies, context switching, and the file system.  LMbench3 is the most mature and commonly used among the LMbench family.  It runs a wide variety of tests, ranging from intensive latency testing of cache misses to extensive context switching testing.  LMbench has been heavily used in industry as well as acadamia \cite{lmbench}. \\
 
 LMbench contains a suite of simple, portable benchmarks, comparing the performance of various UNIX systems.  It includes a variety of bandwidth benchmarks, of which the most popular are: cached file reads, memory operations (copy, read, and write), pipe, and TCP.  Additionally , it supports a wide variety of latency benchmarks, including: context switching, network connection establishment (pipe, TCP, UDP, RPC), file system operations (creates and deletes), process creation, handling of signals, system call overhead, and memory read latencies.  Lmbench also supports a variety of multiprocessor tests and includes large databases of results to compare one's results to. \cite{lmbench_paper}
