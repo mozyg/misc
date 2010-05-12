@@ -1,6 +1,11 @@
-=cluster Stock-Kernel Modified-Kernel Inside-Container
-colors=dark_green,red,blue
-#=patterns
+=cluster Stock-Kernel Modified-Kernel Inside-Container Inside-Container-Without-IPC
+colors=dark_green,red,blue,grey
+=norotate
+ylabel=Seconds
+barwidth=0.8
+intra_space_mul=1.2
+#extraops=set y2label "Frames Per Seconds"
+max=100
 =table
-time 49.13 50.07 0
-fps 20.07 19.7 0
+Quake-TimeDemo 49.13 50.07 89.2 50.7
+# 20.07 19.7 0

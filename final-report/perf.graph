@@ -1,5 +1,6 @@
 =cluster Stock-Kernel Modified-Kernel Inside-Container
 colors=dark_green,red,blue
+ylabel=Time in seconds
 #=patterns
 =table
 gcc 1229 1293 1232
