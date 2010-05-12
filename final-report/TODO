@@ -12,9 +12,6 @@ Check X stuff for quality control
 Evaluation:
 Add description about the experiments
 
-Discussion:
-Quality control and make it fit
-
 Related Work:
 MORE of it.. Fill at least one page with it
 
@@ -31,13 +28,13 @@ REVIEW EVERYTHING!!!
 ----
 IN PROGRESS
 
-Kevin-
-Run Quake benchmark. Get a graph
+Graphs for quake
+graphs for lmbench
 
 Shivaram-
 Measure CPU and memory overhead in containers
 
-Kevin -
-run lmbench. (talk to shivaram/will about modifying the Makefile appropriately)
-  - To run lmbench, pull in the source tree from misc.git
-  - cd src and then make results
+
+Discussion:
+Quality control and make it fit
+
