@@ -34,7 +34,7 @@ ftext & $481000$ & $556000$ & $11.43\%$ \\ [2pt]
 
 \subsection{LXC Performance numbers}
 
-Our addition of the linux container functionality to the kernel imposed no noticeable overhead to the phone.  Our testing (\ref{tab:lxc_perf}) proved that both the container kernel as well as the containers themselves, added no overhead to execution times.  More detailed testing with LMbench3 (\ref{sec:LMbench3})proved that i/o, cpu, and memory performance were unaffected by the addition of the container code.  There was no overhead to running inside a container as well.  
+Our addition of the linux container functionality to the kernel imposed no noticeable overhead to the phone.  Our testing (Figure \ref{fig:perf}) proved that both the container kernel as well as the containers themselves, added no overhead to execution times.  More detailed testing with LMbench3 (Section \ref{sec:LMbench3})proved that i/o, cpu, and memory performance were unaffected by the addition of the container code.  There was no overhead to running inside a container as well.  
 
 \begin{figure}[tbh]
 \centering
@@ -49,7 +49,7 @@ Our addition of the linux container functionality to the kernel imposed no notic
 \begin{figure*}[bth]
 \centering
 \includegraphics[width=1.0\columnwidth]{lmbench}
-\caption{Normalized results from lmbench}
+\caption{Normalized results from LMbench}
 \label{fig:lmbench}
 \end{figure*}
 
