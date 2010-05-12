@@ -5,6 +5,10 @@ intro: review!
 Add a new subsection for unionfs and copy on write file systems
 Add some design ideas for migration
 
+implementation:
+more on webos vs android
+clean up lxc and module compatability section
+
 Evaluation:
 Add description about the experiments
 
