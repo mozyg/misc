@@ -1,12 +1,6 @@
 \section{Evaluation}
 \label{sec:eval}
 
-\subsection{X-Server numbers}
-\label{sec:x_eval}
-
-An important part of our system is the X server used to visualize and interact with the applications.  While our current design is somewhat limited in that it has too many layers of abstractions (using SDL as the backend), we have taken efforts to make the server run faster, which resulted in a much better user experience.  The biggest  performance improvement was moving from basic SDL to SDL-GLESv2 which improved the ``feel'' of X and the applications inside of it noticeably.  To try to capture this speed improvement we ran x11perf, which helps quantify the performance improvements.  As shown in Table \ref{tab:x_results}, there was noticeable improvements in a number of tests.
-These tests we run from a Debian chroot, using localhost communication (not domain sockets) with the server, on the Palm Pre.  The tests were arbitrarily selected, with an attempt at finding representative ones.  These numbers should only be taken as illustrating the general performance improvements, not as an accurate measure of what real applications will be like.
-
 \begin{table}[ht]
 {\small
 \hfill{}
@@ -25,6 +19,12 @@ ftext & $481000$ & $556000$ & $11.43\%$ \\ [2pt]
 \label{tab:x_results}
 \end{table}
 
+\subsection{X-Server numbers}
+\label{sec:x_eval}
+
+An important part of our system is the X server used to visualize and interact with the applications.  While our current design is somewhat limited in that it has too many layers of abstractions (using SDL as the backend), we have taken efforts to make the server run faster, which resulted in a much better user experience.  The biggest  performance improvement was moving from basic SDL to SDL-GLESv2 which improved the ``feel'' of X and the applications inside of it noticeably.  To try to capture this speed improvement we ran x11perf, which helps quantify the performance improvements.  As shown in Table \ref{tab:x_results}, there was noticeable improvements in a number of tests.
+These tests we run from a Debian chroot, using localhost communication (not domain sockets) with the server, on the Palm Pre.  The tests were arbitrarily selected, with an attempt at finding representative ones.  These numbers should only be taken as illustrating the general performance improvements, not as an accurate measure of what real applications will be like.
+
 \begin{figure}[tbh]
 \centering
 \includegraphics[width=1.0\columnwidth]{perf}
@@ -38,6 +38,16 @@ In this section, we measure the overhead of our modifications to the kernel and 
 From the figure, we can see that the overhead is approximately within 5\%-10\% and that running a process within a container does not significantly increase the running time.
 
 %Our addition of the linux container functionality to the kernel imposed no noticeable overhead to the phone.  Our testing (Figure \ref{fig:perf}) proved that both the container kernel as well as the containers themselves, added no overhead to execution times.  
+
+\begin{figure}[tbh]
+\centering
+\includegraphics[width=1.0\columnwidth]{quake}
+\caption{Execution Time for the Quake time-demo}
+\label{fig:Quake}
+\end{figure}
+
+\subsection{Quake Time-Demo}
+To measure the overhead of communicating from the container to an X-server running natively, we run the Quake timedemo \Comment{need ref}. The quake binaries were obtained from libsdl.org  and the command used to run the experiments was "quakedemo +timedemo demo2". Figure \ref{fig:quake} presents the running time of the demo in different scenarios. From the graph, we can see that the running time is similar for the stock kernel and the modified kernel. When the experiment is run from within the container, we observe that the running time increases by about 60\%. We attribute this to the fact that the containers are configured to create a new namespace for IPC and hence the application communicates with the X-Server through the loopback interface. When the containers are launched without a isolated IPC namespaces, we find that the performance is similar to that of the stock kernel.
 
 \subsection{LMbench3} 
 \label{sec:LMbench3}
@@ -63,12 +73,3 @@ Figures \ref{fig:lmbench} and \ref{fig:lmbench-files} present results from runni
 \label{fig:lmbench-files}
 \end{figure*}
 
-\begin{figure}[tbh]
-\centering
-\includegraphics[width=1.0\columnwidth]{quake}
-\caption{Execution Time for the Quake time-demo}
-\label{fig:Quake}
-\end{figure}
-
-\subsection{Quake Time-Demo}
-To measure the overhead of communicating from the container to an X-server running natively, we run the Quake timedemo \Comment{need ref}. The quake binaries were obtained from libsdl.org  and the command used to run the experiments was "quakedemo +timedemo demo2". Figure \ref{fig:quake} presents the running time of the demo in different scenarios. From the graph, we can see that the running time is similar for the stock kernel and the modified kernel. When the experiment is run from within the container, we observe that the running time increases by about 60\%. We attribute this to the fact that the containers are configured to create a new namespace for IPC and hence the application communicates with the X-Server through the loopback interface. When the containers are launched without a isolated IPC namespaces, we find that the performance is similar to that of the stock kernel.
