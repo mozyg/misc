@@ -1,4 +1,4 @@
-=cluster Stock-Kernel Modified-Kernel Inside-Container Inside-Container-Without-IPC
+=cluster Stock-Kernel Modified-Kernel Inside-Container Inside-Container-No-IPC-Namespace
 colors=dark_green,red,blue,grey
 =norotate
 ylabel=Seconds
