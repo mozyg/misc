@@ -25,19 +25,22 @@ Process identifiers (PIDs) are isolated using PID namespaces such that with resp
 Inter-Process Communication (IPC) between processes uses shared objects like shared memory segments, message queues etc. To create isolated environments, it is necessary that processes from one container cannot share data or communicate with other containers. This is achieved by introducing IPC namespaces which creates separate set of IPC objects for each container.
 
 \subsection{User Namespaces}
-User namespaces were first available in Linux kernel 2.6.23.  User namespaces supplies additional uid tables in order to allow a uid to be user specific.  With user namespaces, different processes can be associated with the same uid across different users.
+User namespaces were first available in Linux kernel 2.6.23.  User namespaces supplies additional uid tables in order to allow a uid to be namespace specific.  With user namespaces, different users can be associated with the same uid across different processes.
 
-\subsection{Network Devices}The Linux kernel 2.6.26 was the first version to include network namespaces.  The network namespaces assigns a private set of network resources, including IP addresses, routes, sockets, and more, to any number of processes.  This allows for shared names among different namespaces and isolation between those namespaces.  This provides substantial improvements in security, network resource management, namespace consolidation, and mobility.
+\subsection{Network Devices}
+The Linux kernel version 2.6.26 was the first version to include namespaces for network devices.  The network namespaces assign a private set of network resources, including IP addresses, routes, sockets to any number of processes.  This allows for shared names among different namespaces and isolation between those namespaces.  This provides substantial improvements in security, network resource management, namespace consolidation, and mobility. Network namespaces are implemented using virtual ethernet devices and containers can bind to the same ports without interfering with each other. This is a useful feature as, for example, we could have two webservers listen on port $80$ in different containers.
 
 %% Leaving out
 %% \subsection{\\Proc Namespaces}
 %% \Comment{I can't find good documentation of this, could one of you guys do this one?}
 
 \subsection{Readonly-bind mounts}
-Readonly-bind mounts have been available since Linux kernel 2.6.24.  This allows for read-only accesses to a filesystem mounted read-write.  It guarantees that one process can read and write to the filesystem, while others can only write to it, regardless of their privileges.
+Readonly-bind mounts have been available since Linux kernel 2.6.24.  This allows for read-only accesses to a filesystem mounted read-write.  It guarantees that one process can read and write to the filesystem, while others can only read from it, regardless of their privileges.
 
 \subsubsection{Copy-on-Write filesystems}
+One of the techniques used to prevent duplication of system directories such as /bin, /lib across containers is to mount them as read-only bind mounts from native system into a container. However this means that processes running within containers would be restricted and not able to perform tasks like installing new binaries into /bin. In order to enable each container to make modifications to the system directories and avoid making multiple copies, we use Unionfs \cite{tos06unionfs} a file-level copy-on-write filesystem. 
 
-Resource namespaces allow containers to manipulate the accessing of processes, files, and hardware resources.  Control groups are used to limit the resources used by a container.  Capability bounding sets reduce a container's privileges.  
+Unionfs is a file system which aims to maintain UNIX semantics while providing advanced namespace-unification capabilities. It allows read-only and read-write branches to be inserted into the same tree, handles elimination of duplicates and provides support for snapshots. Unionfs is often used in scenarios where a base OS image is provided on a read-only CD-ROM and any changes made the user are stored in a separate read-write directory. Our use-case is similar as the phone's native OS image is mounted read-only and any changes made by each container is stored in its own separate read-writeable directory.
 
-The main obstacle to using Linux Containers are the requirements.  LXC requires a Linux kernel version 2.6.27 or greater, and the Pre is running 2.6.24.  The kernel functionality would have to be back ported in order to work with the Pre.  The Android is running 2.6.29; however, porting the LXC tools to Android will likely be very difficult.
+\subsection{Other features}
+In addition to the above mentioned isolation features, the Linux Container project adds support for \emph{Control Groups} which can be used to limit the resources used by a container. Additionally, capability bounds can be used to restrict the privileges of a container and these features help ensure that the resources in a machine can be isolated and fairly shared between different containers.

@@ -2,7 +2,7 @@ Overview: Make it fit. A bit longer ?
 
 intro: review!
 
-Add a new subsection for unionfs and copy on write file systems
+design: review!
 Add some design ideas for migration
 
 implementation:
