@@ -6,9 +6,6 @@ Design: Add subsections for
 Add a new subsection for unionfs and copy on write file systems
 Add some design ideas for migration
 
-Implementation:
-Check X stuff for quality control
-
 Evaluation:
 Add description about the experiments
 
@@ -37,4 +34,3 @@ Measure CPU and memory overhead in containers
 
 Discussion:
 Quality control and make it fit
-
